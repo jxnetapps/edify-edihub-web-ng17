@@ -12,10 +12,10 @@ export const environment = {
 	tokenUrl: 'http://localhost:5011/v1/iam/edi-hub/token', // For IdentityServer/Authorization Server API.You can set to null if same as baseUrl
 	loginUrl: '/auth/login',
 	azure:{
-		sasToken:'sp=r&st=2023-10-31T12:37:18Z&se=2043-10-31T20:37:18Z&sv=2022-11-02&sr=c&sig=ZsK%2FI1fujIZnvlT09O1bCRDR4Utu0fFtbKJTTdM6UuU%3D',
-		storageAccountName:'eshgroupstorageaccount',
-		storageContainerName:'eshdocumentcontainer-dev',
-		accessKey:'g4z6rbHdn409LnIzDtGcLGMbcqvUG2Z4vgEbjAWUnoeOv9QxMCXIpd7BjOPqFsr5nZ/BqeqCpNXZ+AStntEcvw=='
+		sasToken:'',
+		storageAccountName:'',
+		storageContainerName:'',
+		accessKey:''
 	  },
 };
 
