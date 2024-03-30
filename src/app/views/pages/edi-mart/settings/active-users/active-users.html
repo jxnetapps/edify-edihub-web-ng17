@@ -1,0 +1,21 @@
+<kt-portlet>
+	<kt-portlet-header [class]="'kt-portlet__head--lg'">
+		<ng-container ktPortletTitle>
+			<h3 class="kt-portlet__head-title">
+				<span>Active Users</span>
+			</h3>
+		</ng-container>
+		<!-- <ng-container ktPortletTools>
+			<button (click)="addAcademicGroup()" mat-raised-button matTooltip="{{'CRUD.NEW_ENTITY' | translate : { name: 'Academic Group'} }}" color="primary" type="button">
+				<span translate="{{'CRUD.NEW_ENTITY' | translate : { name: 'Academic Group'} }}"></span>
+			</button>
+		</ng-container> -->
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="row">
+			<div class="col-lg-12">
+				<kt-jx-data-table [showPager]="false" [config]="config" #jxmattable></kt-jx-data-table>
+			</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

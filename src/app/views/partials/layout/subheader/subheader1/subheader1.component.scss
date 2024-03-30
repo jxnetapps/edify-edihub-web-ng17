@@ -1,0 +1,13 @@
+:host {
+	.kt-subheader__desc {
+		margin: 0;
+	}
+	.kt-subheader__btn-primary{
+		background: #5d78ff !important;
+		color: #fcfcfc;
+		mat-icon{
+			padding: 2px;
+			color: #fcfcfc;
+		}
+	}
+}

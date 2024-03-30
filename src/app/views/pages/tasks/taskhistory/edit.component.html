@@ -1,0 +1,173 @@
+<div class="kt-portlet">
+	<kt-portlet-header [class]="'kt-portlet__head--lg'">
+		<ng-container ktPortletTitle>
+			<h3 class="kt-portlet__head-title">
+				<span translate="{{'CRUD.ENTITY_DETAILS' | translate : { name: 'Tasks'} }}"></span>
+			</h3>
+		</ng-container>
+		<ng-container ktPortletTools>
+			<a (click)="goBackWithId()" class="btn btn-secondary kt-margin-r-10" mat-raised-button matTooltip="{{'COMMANDS.BACKTOOLTIP'| translate : { name: 'Tasks' } }}">
+				<i class="la la-arrow-left"></i>
+				<span class="kt-hidden-mobile">
+					<span translate="COMMANDS.BACK"></span>
+				</span>
+			</a>
+		</ng-container>
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<mat-tab-group>
+			<mat-tab label="History">
+				<div class="kt-container">
+					<div class="kt-notes" *ngIf="ticketshistoryList && ticketshistoryList.length > 0">
+						<div class="kt-notes__items">
+							<div class="kt-notes__item" *ngFor="let row of ticketshistoryList">
+								<div class="kt-notes__media">
+									<!--<img class="kt-hidden-" src="/metronic/themes/metronic/theme/default/demo1/dist/assets/media/users/default.jpg" alt="image">-->
+									<h3 class="kt-notes__user kt-font-boldest">
+										<span [innerHTML]="row.CreatedBy | letterAvatar"></span>
+									</h3>
+								</div>
+								<div class="kt-notes__content">
+									<div class="kt-notes__section">
+										<div class="kt-notes__info">
+											<a href="#" class="kt-notes__title">
+												{{row.CreatedBy}}
+											</a>
+											<span class="kt-notes__desc">
+												{{row.CreatedOn}}
+											</span>
+										</div>
+										<div class="kt-notes__dropdown">
+											<span [innerHTML]="row.Status | taskStatus"></span>&nbsp;
+											<span class="text-uppercase btn btn-bold btn-sm btn-font-sm  btn-label-info">End Date: {{row.EndDate}}</span>
+										</div>
+									</div>
+									<span class="kt-notes__body">
+										{{row.ReplyRemark}}
+									</span>
+									<p>
+										<!--<a class="kt-widget4__title ng-star-inserted"
+											jxDownloader fileName="{{file.DisplayName}}" filePath="{{file.SavedPath}}"
+											*ngFor="let file of row.UploadedFiles " href="{{file.SavedPath}}">
+											<span class="kt-widget4__icon ng-star-inserted">
+												<i class="flaticon-attachment kt-font-focus"></i>
+											</span>
+											{{file.DisplayName}}
+										</a>-->
+										<kt-jx-download *ngFor="let file of row.Attachments" [filePath]="file.SavedPath" [fileName]="file.DisplayName" (downloadStatus)="downloadStatus($event)"></kt-jx-download>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="m-15rem kt-separator kt-separator--space-lg kt-separator--border-dashed"></div>
+					</div>
+					<div *ngIf="ticketshistory">
+						<form class="kt-form" [formGroup]="ticketshistoryForm" autocomplete="off">
+							<div class="row">
+								<div class="col-lg-12 kt-margin-bottom-20-mobile ">
+									<div class="form-group kt-form__group">
+										<mat-form-field appearance="outline" class="mat-form-field-fluid">
+											<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.NOTE' | translate }}</mat-label>
+											<textarea matInput placeholder="{{'COMMON.ENTER'| translate }} {{ 'MODULES.TASKS.TASKDETAILS.FORM.NOTE' | translate  }}" formControlName="ReplyRemark"></textarea>
+											<mat-error>
+												{{ 'MODULES.TASKS.TASKDETAILS.FORM.NOTE' | translate }} {{ 'COMMON.IS' | translate }}
+												<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>
+							</div>
+							<div class="form-group kt-form__group row">
+								<div class="col-lg-4 kt-margin-bottom-20-mobile">
+									<mat-form-field appearance="outline" class="mat-form-field-fluid">
+										<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.STATUS' | translate }}</mat-label>
+										<mat-select placeholder="{{'COMMON.SELECT_NAME'| translate : { name: 'status' } }}" formControlName="Status">
+											<mat-option *ngFor="let row of ticketHistoryDetails.taskStatus" [value]="row.Id">
+												{{row.Name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-lg-4 kt-margin-bottom-20-mobile">
+									<mat-form-field appearance="outline" class="mat-form-field-fluid">
+										<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.ENDDATE' | translate }}</mat-label>
+										<input matInput formControlName="EndDate" [matDatepicker]="ENDDATE" readonly placeholder="{{'COMMON.ENTER'| translate }} {{ 'MODULES.TASKS.TASKDETAILS.FORM.ENDDATE' | translate  }}">
+										<mat-datepicker-toggle matSuffix [for]="ENDDATE"></mat-datepicker-toggle>
+										<mat-datepicker #ENDDATE></mat-datepicker>
+										<mat-error>
+											{{ 'MODULES.TASKS.TASKDETAILS.FORM.ENDDATE' | translate }} {{ 'COMMON.IS' | translate }}
+											<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+										</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4">
+									<kt-jx-file (fileChange)='fileChanged($event)'></kt-jx-file>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<!--<a href="#" class="btn btn-label-brand btn-bold">Add notes</a>-->
+									<button type="button" [disabled]="ticketshistoryForm.invalid || viewLoading" class="btn btn-label-brand btn-bold"
+											[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': viewLoading}"
+											mat-raised-button color="primary" (click)="onSubmit(true)" matTooltip="{{'COMMANDS.SAVETOOLTIP'| translate}}">
+										<span translate="MODULES.TASKS.TASKDETAILS.FORM.UPDATESTATUS"></span>
+									</button>
+
+									<!--<a href="#" class="btn btn-clean btn-bold">Cancel</a>-->
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</mat-tab>
+			<mat-tab label="Task Details">
+				<div class="row  table-view" *ngIf="tickets">
+					<div class="col-lg-12">
+						<table class="table jx-table">
+							<tbody>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.SUBJECT' | translate }}</td>
+									<td>{{tickets.Subject}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDTO' | translate }}</td>
+									<td>{{tickets.AssignedTo}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDBY' | translate }}</td>
+									<td>{{tickets.AssignedBy}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.PRIORITY' | translate }}</td>
+									<td><span [innerHTML]="tickets.Priority | taskPriority"></span></td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.DUEDATE' | translate }}</td>
+									<td>{{tickets.DueDate}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.DESCRIPTION' | translate }}</td>
+									<td>{{tickets.Description}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.CREATEDON' | translate }}</td>
+									<td>{{tickets.CreatedOn}}</td>
+								</tr>
+								<tr>
+									<td class="jx-td-title">{{ 'MODULES.TASKS.TASKDETAILS.FORM.STATUS' | translate }}</td>
+									<td><span [innerHTML]="tickets.Status | taskStatus"></span></td>
+								</tr>
+								<tr *ngIf="tickets && tickets.Attachments && tickets.Attachments.length > 0">
+									<td class="jx-td-title">Attachments:</td>
+									<td><kt-jx-download *ngFor="let file of tickets.Attachments" [filePath]="file.SavedPath" [fileName]="file.DisplayName" (downloadStatus)="downloadStatus($event)"></kt-jx-download></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</mat-tab>
+		</mat-tab-group>
+	</kt-portlet-body>
+</div>

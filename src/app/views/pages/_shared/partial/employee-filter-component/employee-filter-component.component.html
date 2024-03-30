@@ -1,0 +1,22 @@
+<form class="kt-form" [formGroup]="filterForm" autocomplete="off">
+	<div class="kt-form__filtration1">
+		<div class="row align-items-center">
+			<div class="col-md-12 kt-margin-bottom-10-mobile">
+				<div class="form-group kt-form__group d-flex">
+					<div class="filter-item">
+						<kt-jx-shared-departments [control]="filterForm.get('departmentId') | formControl"></kt-jx-shared-departments>
+					</div>
+					<div class="filter-item">
+						<kt-jx-mat-select [control]="filterForm.get('employeeId') | formControl" [loadOnChange]="departmentChanged" [label]="'Employee'" [url]="getEmployeeApiUrl" [valueField]="'id'" [textField]="'name'" [loadOnInit]="false"> </kt-jx-mat-select>
+					</div>
+					<div class="filter-item">
+						<button type="button" [disabled]="filterForm.invalid" class="btn btn-primary btn-elevate kt-login__btn-primary filter-button" [ngClass]="{ 'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': viewLoading }" mat-raised-button color="primary" (click)="submit()">Submit</button>
+					</div>
+					<div class="filter-item">
+						<button type="button" class="btn btn-primary btn-elevate kt-login__btn-primary filter-button" mat-raised-button color="warn" (click)="clearFilter()">Clear</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

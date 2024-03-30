@@ -1,0 +1,70 @@
+<div class="kt-portlet" [ngClass]="{ 'kt-portlet--body-progress' : viewLoading}">
+  <div class="kt-portlet__head kt-portlet__head__custom">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title">Mail Log Details</h3>
+    </div>
+  </div>
+  <form class="kt-form">
+    <div class="kt-portlet__body">
+      <div class="kt-portlet__body-progress">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </div>
+      <kt-alert *ngIf="!mailLog" type="warn" [showCloseButton]="true" [duration]="10000">
+        <span translate="{{'NODATA_NAME' | translate : { name: 'mailLog'} }}"></span>
+      </kt-alert>
+      <div class="row table-view" *ngIf="mailLog">
+        <div class="col-md-12">
+          <table class="table jx-table">
+            <tbody>
+              <tr>
+                <td class="jx-td-title">{{ 'RECEIVEREMAILID' | translate }}</td>
+                <td>{{mailLog.receiverEmailId}}</td>
+              </tr>
+              <tr>
+                <td class="jx-td-title">{{ 'ccMailId' | translate }}</td>
+                <td>{{mailLog.ccMailId}}</td>
+              </tr>
+              <tr>
+                <td class="jx-td-title">{{ 'SUBJECT' | translate }}</td>
+                <td>{{mailLog.subject}}</td>
+              </tr>
+              <tr>
+                <td class="jx-td-title">{{ 'MESSAGE' | translate }}</td>
+                <td>
+                  <div [innerHTML]="mailLog.message"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="jx-td-title">{{ 'CREATEDON' | translate }}</td>
+                <td>{{mailLog.createdOn | date}}</td>
+              </tr>
+              <ng-container *ngIf="mailLog?.attachments">
+                <tr>
+                  <td colspan="2">
+                    <p *ngFor="let file of mailLog.attachments">
+                    <kt-jx-download 
+                      [url]="getDownloadUrl(file)"
+                    [filePath]="file.savedPath" [fileName]="file.name"></kt-jx-download>
+                  </p>
+                  </td>
+                </tr>
+              </ng-container>              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="kt-portlet__foot kt-portlet__foot--fit kt-portlet__no-border">
+      <div class="kt-form__actions kt-form__actions--solid">
+        <div class="row text-right">
+          <div class="col-lg-12">
+            <button type="button" mat-raised-button [mat-dialog-close]="data.animal" cdkFocusInitial
+              matTooltip="{{'COMMANDS.CANCEL_CHANGES'| translate}}">
+              <span translate="COMMANDS.CANCEL"></span>
+            </button>&nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,399 @@
+//
+// Custom Example 1 Style
+// Here you can put your custom sass code, use global SASS mixings and variables to override the theme or add new styles according to your requirements.
+// Most of the changes can be achieved via global or layout level sass variable changes.
+//
+
+
+.my-custom-style {
+    padding: 1rem 0.5rem;
+    color: kt-brand-color();
+
+    .my-custom-element {
+        margin-left: 1rem;
+    }
+}
+
+@include kt-tablet-and-mobile {
+    .my-custom-style {
+        padding: 0.5rem 0.25rem;
+
+        .my-custom-element {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.kt-form .kt-form__group {
+    margin-bottom: 0;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+.mat-raised-button.mat-success {
+    background-color: #0abb87;
+    color: white;
+}
+.mat-raised-button.mat-danger {
+    background-color: #fd397a;
+    color: white;
+}
+
+.mat-raised-button.mat-warning {
+    background-color: #ffb822;
+    color: white;
+}
+
+.mat-raised-button.btn-sm {
+    line-height: 30px;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-success {
+    background-color: #0abb87;
+    color: white;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-danger {
+    background-color: #fd397a;
+    color: white;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-warning {
+    background-color: #ffb822;
+    color: white;
+}
+
+.table-view .row {
+	height: 35px !important;
+}
+
+.input-group-custom {
+	border: 1px solid #e2e5ec;
+	border-radius: 4px;
+}
+
+.form-control-nocolor {
+	border-color: #fff;
+}
+
+.min-mat-table__wrapper .mat-table {
+	min-width: 895px;
+	width: 100%;
+	overflow-x: scroll;
+}
+
+.mat-column-action {
+	flex: 0 0 80px !important;
+}
+
+.mat-column-StudentId, .mat-column-UniqueId, .mat-column-AdmissionNo {
+	flex: 0 0 80px !important;
+}
+
+.mat-column-StudentName, .mat-column-FullName {
+	flex: 0 0 170px !important;
+}
+table.table.jx-table {
+    --bs-table-accent-bg: #ffffff;
+}
+.jx-table{
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #ebedf2;
+}
+// .jx-table > :not(:first-child) {
+//     border-top: 2px solid currentColor;
+//     border-color: #ebedf2;
+// }
+.jx-table > tbody {
+    vertical-align: inherit;
+}
+.jx-table > :not(caption) > * > * {
+    padding: 0.7rem 0.7rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.jx-table thead th, .jx-table thead td {
+    font-weight: 500;
+    border-bottom-width: 1px;
+    /* padding-top: 1rem; */
+    padding-bottom: 1rem;
+    text-align: left !important;
+}
+.jx-table > thead {
+    vertical-align: bottom;
+}
+.jx-table:not(.jx-table-bordered) thead th, .jx-table:not(.jx-table-bordered) thead td {
+     border-top: 0; 
+}
+.jx-table thead{
+    background-color:#5d78ff;
+    height: 42px;
+    color:#ffffff;
+}
+.jx-table tfoot{
+    background-color:#f0f8f4
+}
+.jx-table thead tr{
+    text-align: center;
+}
+.jx-table tr {
+	padding: .3rem 0;
+	align-items: center;
+	border-bottom: 0.07rem dashed #ebedf2;
+}
+
+.jx-table td {
+	border: none !important;
+    vertical-align: middle;
+}
+
+.jx-td-title {
+	font-size: 1.1rem;
+	font-weight: 500;
+	color: #595d6e;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+	color: rgba(0,0,0,.12) !important
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+	color: #5d78ff !important
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+	color: #5d78ff !important
+}
+
+.mat-form-field-appearance-outline.mat-focused.mat-accent .mat-form-field-outline-thick {
+	color: #e0e0e0 !important
+}
+
+.mat-form-field-appearance-outline.mat-focused.mat-warn .mat-form-field-outline-thick, .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+	color: #ff5252 !important
+}
+
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-label {
+	color: rgba(0,0,0,.38) !important
+}
+
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+	color: rgba(0,0,0,.06) !important
+}
+
+.kt-user-card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 2rem 1rem;
+    background-color: #f9fafe
+}
+
+.kt-user-card .kt-user-card__avatar .kt-badge,.kt-user-card .kt-user-card__avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px
+}
+
+.kt-user-card .kt-user-card__avatar .kt-badge {
+    font-size: 2.2rem
+}
+
+.kt-user-card .kt-user-card__name {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    color: #595d6e;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding-left: 1rem
+}
+
+.kt-user-card .kt-user-card__badge {
+    padding-left: .5rem
+}
+
+.kt-user-card.kt-user-card--skin-light .kt-user-card__name {
+    color: #595d6e
+}
+
+.kt-user-card.kt-user-card--skin-dark .kt-user-card__name {
+    color: #fff
+}
+
+.kt-user-card.kt-user-card--skin-dark .kt-user-card__avatar .kt-badge {
+    background-color: rgba(255,255,255,.1)
+}
+
+@media (max-width: 1024px) {
+    .kt-user-card {
+        padding:1rem 1rem
+    }
+
+    .kt-user-card .kt-user-card__avatar .kt-badge,.kt-user-card .kt-user-card__avatar img {
+        width: 40px;
+        height: 40px
+    }
+
+    .kt-user-card .kt-user-card__name {
+        font-size: 1.1rem;
+        padding-left: .5rem
+    }
+
+    .kt-user-card .kt-user-card__badge {
+        padding-left: .5rem
+    }
+}
+
+.kt-user-card-v2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0;
+    margin: 0
+}
+
+.kt-user-card-v2 .kt-user-card-v2__pic {
+    padding-right: .5rem
+}
+
+.kt-user-card-v2 .kt-user-card-v2__pic .kt-badge {
+    width: 40px;
+    height: 40px
+}
+
+.kt-user-card-v2 .kt-user-card-v2__pic img {
+    border-radius: 50%;
+    max-width: 40px;
+    max-height: 40px
+}
+
+.kt-user-card-v2 .kt-user-card-v2__details {
+    line-height: 0
+}
+
+.kt-user-card-v2 .kt-user-card-v2__details .kt-user-card-v2__name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    color: #595d6e
+}
+
+a.kt-user-card-v2__name{
+    text-decoration: none;
+}
+
+.kt-user-card-v2 .kt-user-card-v2__details a.kt-user-card-v2__name:hover {
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    color: #5d78ff
+}
+
+.kt-user-card-v2 .kt-user-card-v2__details .kt-user-card-v2__desc,.kt-user-card-v2 .kt-user-card-v2__details .kt-user-card-v2__email {
+    margin-top: 3px;
+    display: inline-block;
+    font-size: .9rem;
+    line-height: 1rem;
+    font-weight: 400;
+    color: #74788d
+}
+
+.kt-user-card-v2 .kt-user-card-v2__details a.kt-user-card-v2__email:hover {
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    color: #5d78ff
+}
+
+.kt-user-card-v2.kt-user-card-v2--uncircle .kt-user-card-v2__pic img {
+    border-radius: 4px
+}
+
+@media (max-width: 1024px) {
+    .kt-user-card-v2 .kt-user-card-v2__pic img {
+        max-width:30px
+    }
+}
+
+.kt-user-card-v3 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.kt-user-card-v3 .kt-user-card-v3__avatar>img {
+    height: 120px;
+    width: 120px;
+    border-radius: 7px
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis {
+    padding-left: 1.5rem
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis a.kt-user-card-v3__name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #33323f;
+    text-decoration: none;
+    padding-bottom: .8rem;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis a.kt-user-card-v3__name:hover {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    color: #5d78ff
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis .kt-user-card-v3__desc {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #b2afc6;
+    padding: .8rem 0
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis .kt-user-card-v3__info a.kt-user-card-v3__item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: .8rem
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis .kt-user-card-v3__info a.kt-user-card-v3__item>i {
+    line-height: 0;
+    font-size: 1.4rem
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis .kt-user-card-v3__info a.kt-user-card-v3__item .kt-user-card-v3__tag {
+    font-size: .9rem;
+    font-weight: 400;
+    color: #9e9bb1;
+    padding-left: .8rem;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.kt-user-card-v3 .kt-user-card-v3__detalis .kt-user-card-v3__info a.kt-user-card-v3__item:hover .kt-user-card-v3__tag {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    color: #5d78ff
+}

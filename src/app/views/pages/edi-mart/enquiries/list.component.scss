@@ -1,0 +1,50 @@
+.mat-column-EnquiryId {
+	flex: 0 0 70px !important;
+}
+.mat-column-ProductName {
+	flex: 0 0 105px !important;
+}
+.mat-column-Contacts {
+	flex: 0 0 200px !important;
+}
+
+.contacts-wrapper {
+	display: flex;
+}
+
+.contacts-wrapper .launch-item {
+	visibility: hidden;
+}
+
+.contacts-wrapper:hover .launch-item {
+	visibility: visible;
+}
+.contact-item {
+	width: 160px;
+}
+.launch-item {
+	flex-grow: 1;
+}
+
+.mat-column-EnquiryId,
+	.mat-column-ClassId {
+		flex: 0 0 70px !important;
+	}
+
+	.mat-column-ClassId {
+		flex: 0 0 80px !important;
+	}
+
+	.mat-column-ChildName {
+		flex: 0 0 180px !important;
+	}
+
+	.mat-column-actions {
+		flex: 0 0 80px !important;
+	}
+	.mat-column-Contacts {
+		flex: 0 0 230px !important;
+	}
+	.mat-column-City {
+		flex: 0 0 120px !important;
+	}

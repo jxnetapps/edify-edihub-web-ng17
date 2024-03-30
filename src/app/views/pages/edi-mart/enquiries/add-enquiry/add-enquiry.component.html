@@ -1,0 +1,99 @@
+<jx-mat-form [title]="'Add Enquiry'" [showToolBarAddBtn]="false" [showToolBar]="true" [showToolBarBackBtn]="true"
+	[saveDisabled]="formConfig.formGroup.invalid" [saving]="formConfig.saving" [formLoading]="formConfig.formLoading"
+	[isMatDialog]="false" [parentGroup]="formConfig.formGroup" (onSave)="onSubmit(true)" (onCancel)="goBackToList()">
+	<div class="row">
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [enableOptGroup]="true" [groupBy]="'productTypeName'" [loadOnChange]="false"
+					[loadOnInit]="true" [label]="'Product'" [url]="'/v1/marketing/enquiry-products'" [valueField]="'id'"
+					[textField]="'name'" [control]="formConfig.formGroup.get('productId')"></kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [loadOnChange]="false" [loadOnInit]="true" [label]="'State'"
+					[url]="'/v1/masters/states'" [valueField]="'id'" [textField]="'name'"
+					[control]="formConfig.formGroup.get('stateId')"></kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [loadOnChange]="false" [loadOnInit]="true" [label]="'Reporting Person'"
+					[url]="'/v1/marketing/users'" [valueField]="'userId'" [textField]="'employeeName'"
+					[control]="formConfig.formGroup.get('reportingPersonId')"></kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [loadOnChange]="false" [loadOnInit]="true" [label]="'Source'"
+					[url]="'/v1/marketing/enquiry-sources'" [valueField]="'name'" [textField]="'name'"
+					[control]="formConfig.formGroup.get('source')"></kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Party Name'" [placeholder]="'Party Name'"
+					[control]="formConfig.formGroup.get('partyName')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Email'" [placeholder]="'EMAIL'"
+					[control]="formConfig.formGroup.get('email')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Mobile'" [placeholder]="'MOBILE'"
+					[control]="formConfig.formGroup.get('mobile')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Landline No'" [placeholder]="'LANDLINENO'"
+					[control]="formConfig.formGroup.get('landLineNo')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Location'" [control]="formConfig.formGroup.get('city')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input-textarea [label]="'Address'"
+					[control]="formConfig.formGroup.get('address')"></jx-mat-input-textarea>
+			</div>
+		</div>
+
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Company Name'" [control]="formConfig.formGroup.get('companyName')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Area'" [control]="formConfig.formGroup.get('area')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input [label]="'Investment Capacity'"
+					[control]="formConfig.formGroup.get('investmentCapacity')"></jx-mat-input>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [label]="'Status'" [url]="'/v1/marketing/enquiry-status'" [valueField]="'id'"
+					[control]="formConfig.formGroup.get('status')" [textField]="'name'" [loadOnInit]="true"
+					[placeholder]="'Select Status'"> </kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-12 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<jx-mat-input-textarea [label]="'Client Query'" [placeholder]="'Enter remarks...'"
+					[control]="formConfig.formGroup.get('remarks')"></jx-mat-input-textarea>
+			</div>
+		</div>
+	</div>
+</jx-mat-form>

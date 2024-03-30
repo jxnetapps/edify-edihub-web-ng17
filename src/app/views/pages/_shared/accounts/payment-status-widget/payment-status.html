@@ -1,0 +1,42 @@
+<div class="row wrap">
+  <div class="col-lg-2">
+    <kt-info-box-widget [look]="'widget'" [type]="'pink'" [header]="'Total'" [subheader]="dataSource?.FeeAmount">
+    </kt-info-box-widget>
+  </div>
+  <div class="col-lg-2">
+    <kt-info-box-widget [look]="'widget'" [type]="'warning'" [header]="'Concession'" [subheader]="dataSource?.Concession">
+    </kt-info-box-widget>
+  </div>
+  <div class="col-lg-2">
+    <kt-info-box-widget [look]="'widget'" [type]="'info'" [header]="'Payable'" [subheader]="dataSource?.PayableAmount">
+    </kt-info-box-widget>
+  </div>
+  <div class="col-lg-2">
+    <kt-info-box-widget [look]="'widget'" [type]="'success'" [header]="'Paid'" [subheader]="dataSource?.PaidAmount">
+    </kt-info-box-widget>
+  </div>
+  <div class="col-lg-2">
+    <kt-info-box-widget [look]="'widget'" [type]="'danger'" [header]="'Balance'" [subheader]="dataSource?.DueAmount">
+    </kt-info-box-widget>
+  </div>
+</div>
+<div class="row wrap" class="mt-10" *ngIf="showProgress">
+  <div class="col-lg-12">
+    <div class="kt-widget12">
+      <div class="kt-widget12__content">
+        <div class="kt-widget12__item">
+          <div class="kt-widget12__info">
+            <span class="kt-widget12__desc text-uppercase">Paid Margin</span>
+            <div class="kt-widget12__progress">
+              <div class="progress kt-progress--sm">
+                <div class="progress-bar bg-success" role="progressbar" [style.width.%]="dataSource?.PaidPercentage"
+                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <span class="kt-widget12__stat">{{dataSource?.PaidPercentage}}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

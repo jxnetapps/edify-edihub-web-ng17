@@ -1,0 +1,6 @@
+<div class="w-100 h-300p" #resizedDiv>
+    <ngx-charts-pie-chart [results]="data" [legend]="showLegend"
+        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut"
+        [gradient]="gradient" (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+</div>

@@ -1,0 +1,176 @@
+<div class="row">
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'My Task Summary'"></kt-portlet-header>
+			<kt-portlet-body>
+				<div class="kt-widget12">
+					<div class="kt-widget12__content">
+						<div class="kt-widget12__item">
+							<div class="kt-widget12__info kt-widget12__info-primary">
+								<span class="kt-widget12__desc text-uppercase">Total Tasks</span>
+								<span
+									class="kt-widget12__value kt-font-primary">{{my.myTotal}}</span>
+							</div>
+							<div class="kt-widget12__info kt-widget12__info-danger">
+								<span class="kt-widget12__desc text-uppercase">Pending Tasks</span>
+								<span class="kt-widget12__value kt-font-danger">{{my.myPending}}</span>
+							</div>
+						</div>
+						<div class="kt-widget12__item">
+							<div class="kt-widget12__info">
+								<span class="kt-widget12__desc text-uppercase">Completion Status</span>
+								<div class="kt-widget12__progress">
+									<div class="progress kt-progress--sm">
+										<div class="progress-bar bg-success" role="progressbar"
+											[style.width.%]="my.myCloseMargin" aria-valuenow="100"
+											aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<span class="kt-widget12__stat">{{my.myCloseMargin}}%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Assignee Task Summary'"></kt-portlet-header>
+			<kt-portlet-body>
+				<div class="kt-widget12">
+					<div class="kt-widget12__content">
+						<div class="kt-widget12__item">
+							<div class="kt-widget12__info kt-widget12__info-primary">
+								<span class="kt-widget12__desc text-uppercase">Total Tasks</span>
+								<span
+									class="kt-widget12__value kt-font-primary">{{assignee.assigneeTotal}}</span>
+							</div>
+							<div class="kt-widget12__info kt-widget12__info-danger">
+								<span class="kt-widget12__desc text-uppercase">Pending Tasks</span>
+								<span class="kt-widget12__value kt-font-danger">{{assignee.assigneePending}}</span>
+							</div>
+						</div>
+						<div class="kt-widget12__item">
+							<div class="kt-widget12__info">
+								<span class="kt-widget12__desc text-uppercase">Completion Status</span>
+								<div class="kt-widget12__progress">
+									<div class="progress kt-progress--sm">
+										<div class="progress-bar bg-success" role="progressbar"
+											[style.width.%]="assignee.assigneeCloseMargin" aria-valuenow="100"
+											aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<span class="kt-widget12__stat">{{assignee.assigneeCloseMargin}}%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						Status Wise Details<small>(My Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<jx-bar-vertical [data]="myStatusData"></jx-bar-vertical>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-lg-6">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						Status Wise Details<small>(Assignee Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<jx-bar-vertical [data]="assigneeStatusData"></jx-bar-vertical>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						Priority Wise Details<small>(My Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<jx-pie-advance-chart [data]="myPriorityData"></jx-pie-advance-chart>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-lg-6">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						Priority Wise Details<small>(Assignee Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<jx-pie-advance-chart [data]="assigneePriorityData"></jx-pie-advance-chart>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6" *ngIf="my && my.myUserwise">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						User Wise Details<small>(My Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<table class="table jx-table">
+					<tbody>
+						<tr *ngFor="let row of my.myUserwise">
+							<td class="kt-font-primary">{{row.AssignedBy}}</td>
+							<td class="jx-td-title kt-font-danger">{{row.Total}}</td>
+						</tr>
+						</tbody>	
+						</table>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-lg-6" *ngIf="assignee && assignee.assigneeUserwise">
+		<kt-portlet>
+			<kt-portlet-header [class]="'kt-portlet__head--lg'">
+				<ng-container ktPortletTitle>
+					<h3 class="kt-portlet__head-title">
+						User Wise Details<small>(Assignee Tasks)</small>
+					</h3>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<table class="table jx-table">
+					<tbody>
+						<tr *ngFor="let row of assignee.assigneeUserwise">
+							<td class="kt-font-primary">{{row.AssignedTo}}</td>
+							<td class="jx-td-title kt-font-danger">{{row.Total}}</td>
+						</tr>
+						</tbody>	
+						</table>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>

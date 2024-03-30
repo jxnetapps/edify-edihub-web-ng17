@@ -1,0 +1,65 @@
+<div class="kt-form">
+    <div class="kt-form__filtration m-0">
+        <form [formGroup]="filterForm" autocomplete="off">
+            <div class="row align-items-center">
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'Parent Name'" [placeholder]="'Enter parent name'"
+                        [control]="filterForm.get('ParentName')"></jx-mat-input>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'Student Name'" [placeholder]="'Enter student name'"
+                        [control]="filterForm.get('ChildName')"></jx-mat-input>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'Mobile'" [type]="'number'" [placeholder]="'Enter mobile#'"
+                        [control]="filterForm.get('Mobile')"></jx-mat-input>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'Email'" [type]="'email'" [placeholder]="'Enter email#'"
+                        [control]="filterForm.get('Email')"></jx-mat-input>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'Enquiry ID'" [type]="'number'" [placeholder]="'Enter enquiryId#'"
+                        [control]="filterForm.get('EnquiryId')"></jx-mat-input>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-input [label]="'City'" [placeholder]="'Enter city'" [control]="filterForm.get('City')">
+                    </jx-mat-input>
+                </div>
+                <div *ngIf="showStatus" class="col-md-2 kt-margin-bottom-20-mobile">
+                    <kt-jx-mat-select [loadOnInit]="true" [url]="'api/preadmissions/status-types/all'"
+                        [label]="'Status'" [multiple]="true" [valueField]="'StatusId'" [textField]="'Name'"
+                        [control]="filterForm.get('Status')">
+                    </kt-jx-mat-select>
+                </div>
+                <div class="col-md-2 kt-margin-bottom-10-mobile">
+                    <kt-jx-mat-select [enableOptGroup]="true" [groupBy]="'AcademicGroupName'" [label]="'Class'"
+                        [multiple]="true" [url]="'api/academics/classes/lookup'" [valueField]="'ClassId'"
+                        [textField]="'ClassName'" [loadOnInit]="true" [placeholder]="'Select Class'"
+                        [control]="filterForm.get('ClassIds')">
+                    </kt-jx-mat-select>
+                </div>
+                <div *ngIf="showCreatedDate" class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-date-range-picker [label]="'Create Date Range'"
+                        [dateRangeFormGroup]="filterForm.get('CreatedDateRange')"></jx-mat-date-range-picker>
+                </div>
+                <div *ngIf="showFollowupDate" class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-date-range-picker [label]="'Followup Date Range'"
+                        [dateRangeFormGroup]="filterForm.get('FollowupDateRange')"></jx-mat-date-range-picker>
+                </div>
+                <div *ngIf="showModifiedDate" class="col-md-2 kt-margin-bottom-10-mobile">
+                    <jx-mat-date-range-picker [label]="'LastUpdated Date Range'"
+                        [dateRangeFormGroup]="filterForm.get('LastUpdatedDateRange')"></jx-mat-date-range-picker>
+                </div>
+                <div class="col-md-1 text-right kt-margin-bottom-10-mobile">
+                    <jx-mat-raised-button (onClick)="onFilterSubmit()" [title]="'Search'" [loading]="viewLoading"
+                        [isFilterButton]="true"></jx-mat-raised-button>
+                </div>
+                <div class="col-md-1 text-right kt-margin-bottom-10-mobile">
+                    <jx-mat-raised-button (onClick)="clearFilter()" [title]="'Clear'" [color]="'warn'"
+                        [loading]="viewLoading" [isFilterButton]="true"></jx-mat-raised-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="mat-table__wrapper--dashboard mb-4">
+	<mat-table class="lmat-elevation-z8"
+			   #table
+			   [dataSource]="dataSource">
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
+			<mat-cell *matCellDef="let row; let i = index;">{{i + 1}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="Status">
+			<mat-header-cell *matHeaderCellDef>{{'MODULES.PREADMISSIONS.ENQUIRYFOLLOWUPS.FORM.STATUS' | translate }}</mat-header-cell>
+			<mat-cell *matCellDef="let row" [innerHTML]="row.status | enquiryStatus"></mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="NextFollowupDate">
+			<mat-header-cell *matHeaderCellDef>NextFollowup Time </mat-header-cell>
+			<mat-cell *matCellDef="let row">{{getNextFollowupDateTime(row)}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="followupCreatedDate">
+			<mat-header-cell *matHeaderCellDef>Created Date</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				{{row.followupCreatedDate | date}}
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="followupCreatedBy">
+			<mat-header-cell *matHeaderCellDef>CreatedBy</mat-header-cell>
+			<mat-cell *matCellDef="let row">{{row.followupCreatedBy}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="Remarks">
+			<mat-header-cell *matHeaderCellDef>{{'MODULES.PREADMISSIONS.ENQUIRYFOLLOWUPS.FORM.REMARKS' | translate }}</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+			<span matTooltip="{{row.remarks}}" [innerHTML]="row.remarks"></span>
+			</mat-cell>
+		</ng-container>
+		
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+	</mat-table>
+	<div class="mat-table__message" *ngIf="!(dataSource.hasItems$ | async)">{{'COMMON.NO_RECORDS_FOUND' | translate }}</div>
+	<div class="mat-table__message" *ngIf="dataSource.loading$ | async">{{'COMMON.PLEASE_WAIT' | translate }}</div>
+</div>

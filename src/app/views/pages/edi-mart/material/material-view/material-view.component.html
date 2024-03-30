@@ -1,0 +1,59 @@
+<div class="kt-portlet">
+  <div class="kt-portlet__head kt-portlet__head__custom" *ngIf="materialModel">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title">{{getTitle()}}</h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+      <a (click)="backToList()" class="btn btn-secondary kt-margin-r-10"
+        mat-raised-button>
+        <i class="la la-arrow-left"></i>
+        <span class="kt-hidden-mobile">
+          <span translate="COMMANDS.BACK"></span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="kt-portlet__body">
+    <kt-alert *ngIf="!materialModel" type="warn" [showCloseButton]="true" [duration]="10000">
+      <span>NO DATA AVAILABLE</span>
+    </kt-alert>
+    <div class="row table-view" *ngIf="materialModel">
+      <div class="col-md-12">
+        <table class="table jx-table">
+          <tbody>
+            <tr>
+              <td style="width:30%" class="jx-td-title">{{ 'NAME' | translate }}</td>
+              <td>{{materialModel.name}}</td>
+            </tr>
+            <tr>
+              <td class="jx-td-title">{{ 'SUBJECT' | translate }}</td>
+              <td>{{materialModel.subject}}</td>
+            </tr>
+            <tr>
+              <td class="jx-td-title">{{ 'BODY' | translate }}</td>
+              <td>{{materialModel.body}}</td>
+            </tr>
+            <tr>
+              <td class="jx-td-title">{{ 'CREATEDON' | translate }}</td>
+              <td>{{materialModel.createdOnText}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row table-view" *ngIf="materialModel">
+      <hr>
+      <div class="col-md-12">
+        <table class="table jx-table">
+          <tbody>
+            <tr *ngFor="let file of materialModel.attachments">
+              <td>
+                <kt-jx-download [filePath]="file.savedPath" [fileName]="file.name"></kt-jx-download>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

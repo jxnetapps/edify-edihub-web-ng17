@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-xl-12">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-body>
+				<div class="row">
+					<div class="col-lg-12">
+						<mat-tab-group (selectedTabChange)="tabChanged($event.index)">
+							<mat-tab label="My Tasks">
+								<kt-tasks-list-template *ngIf="activeTabIndex === 0" [tasktype]="'my'">
+								</kt-tasks-list-template>
+							</mat-tab>
+							<mat-tab label="Assigned tasks">
+								<kt-tasks-list-template *ngIf="activeTabIndex === 1" [tasktype]="'assigned'">
+								</kt-tasks-list-template>
+							</mat-tab>
+						</mat-tab-group>
+					</div>
+				</div>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>

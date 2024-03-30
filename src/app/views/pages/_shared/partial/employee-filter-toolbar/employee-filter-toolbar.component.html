@@ -1,0 +1,50 @@
+<form class="kt-form" [formGroup]="filterForm" autocomplete="off">
+	<div class="vss-Hub--filterBar">
+		<div class="vss-FilterBar">
+			<div class="vss-FilterBar--list">
+				<div class="vss-FilterBar--item vss-FilterBar--item-keyword-container">
+					<div class="flex-column flex-grow">
+						<div
+							class="bolt-text-filterbaritem flex-grow bolt-textfield flex-row flex-center focus-keyboard-only">
+							<span class="fluent-icons-enabled">
+								<span aria-hidden="true"
+									class="keyword-filter-icon prefix bolt-textfield-icon bolt-textfield-no-text flex-noshrink fabric-icon ms-Icon--Filter medium">
+									<button type="button" disabled="true" mat-icon-button color="warn">
+										<mat-icon>search</mat-icon>
+									</button>
+								</span>
+							</span>
+							<input matInput [formControl]="filterForm.get('searchText')" type="text" autocomplete="off"
+								aria-label="Filter by keyword"
+								class="bolt-text-filterbaritem-input bolt-textfield-input flex-grow bolt-textfield-input-with-prefix"
+								id="__bolt-textfield-input-2" maxlength="200" placeholder="Filter by keyword"
+								role="searchbox" tabindex="0" value="" />
+						</div>
+					</div>
+				</div>
+				<div class="vss-FilterBar--item">
+					<div class="bolt-dropdown-filter-bar-item inline-flex-row">
+						<kt-jx-shared-departments [control]="filterForm.get('departmentId')"></kt-jx-shared-departments>
+					</div>
+				</div>
+				<div class="vss-FilterBar--item" *ngIf="showEmployee">
+					<div class="bolt-dropdown-filter-bar-item inline-flex-row">
+						<kt-jx-mat-select [control]="filterForm.get('employeeId') | formControl"
+							[loadOnChange]="departmentChanged" [label]="'Employee'" [url]="getEmployeeApiUrl"
+							[valueField]="'id'" [textField]="'name'" [loadOnInit]="false"> </kt-jx-mat-select>
+					</div>
+				</div>
+				<div class="vss-FilterBar--item">
+					<span class="fluent-icons-enabled">
+						<span aria-hidden="true" (click)="clearFilter()"
+							class="keyword-filter-icon prefix bolt-textfield-icon bolt-textfield-no-text flex-noshrink fabric-icon ms-Icon--Filter medium">
+							<button type="button" mat-icon-button color="warn" matTooltip="Clear and dismiss filters">
+								<mat-icon>close</mat-icon>
+							</button>
+						</span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

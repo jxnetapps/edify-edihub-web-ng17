@@ -1,0 +1,7 @@
+<kt-jx-mat-select  [loadOnInit]="true" [label]="'Institute Group'" (selectChange)="selectChanged($event)"
+   [url]="'api/settings/org-groups/all'" [valueField]="'InstituteGroupId'" [textField]="'Name'"
+   [multiple]="false" [placeholder]="'Select Institute Group'" [control]="control"
+   [showInnerAdd]="true"
+   [showAddButton]="false"
+   [addUrl]="'api/settings/org-groups/create'"
+   ></kt-jx-mat-select>

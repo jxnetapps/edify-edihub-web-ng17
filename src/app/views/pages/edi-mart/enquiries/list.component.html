@@ -1,0 +1,217 @@
+<kt-portlet>
+	<!-- <kt-portlet-header [class]="'kt-portlet__head--lg'">
+		<ng-container ktPortletTitle>
+			<h3 class="kt-portlet__head-title">
+				<span translate="{{ 'CRUD.ENTITY_LIST' | translate : { name: 'Enquiries' } }}"></span>
+			</h3>
+		</ng-container>
+		<ng-container ktPortletTools>
+			<button (click)="addEnquiries()" mat-raised-button matTooltip="{{ 'CRUD.NEW_ENTITY' | translate : { name: 'Enquiries' } }}" color="primary" type="button">
+				<span translate="{{ 'CRUD.NEW_ENTITY' | translate : { name: 'Enquiries' } }}"></span>
+			</button>
+		</ng-container>
+	</kt-portlet-header> -->
+	<kt-portlet-body>
+		<div class="kt-form">
+			<div class="kt-form__filtration">
+				<div class="row align-items-center">
+					<!-- <div class="col-md-4 kt-margin-bottom-10-mobile">
+						<kt-jx-mat-select [label]="'Employee'" [valueField]="'EmployeeId'" [loadOnChange]="true" [dataSource]="employeeItems$ | async"
+							[textField]="'EmployeeName'" [placeholder]="'Select Employee'"></kt-jx-mat-select>
+					</div> -->
+					<div class="col-md-12 kt-margin-bottom-10-mobile">
+						<mat-radio-group class="mat-radio-group" [formControl]="filterForm.get('EnquiryTypeCode')" #radioGroup="matRadioGroup" (change)="rbtEnquiryTypeChange($event)">
+							<mat-radio-button *ngFor="let opt of enquiryTypeResult$ | async" [value]="opt.EnquiryTypeId" [checked]="opt.EnquiryTypeId === 1" [disabled]="opt.Total === 0"> {{ opt.EnquiryTypeName }}({{ opt.Total }}) </mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="kt-separator kt-separator--dashed"></div>
+				</div>
+				<form [formGroup]="filterForm" autocomplete="off" style="font-size: 11px">
+					<div class="row align-items-center">
+						<div class="col-lg-2 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<kt-jx-mat-select [multiple]="true"
+									[label]="'Status'"
+									[url]="'/v1/marketing/enquiry-status'" [valueField]="'id'"
+									[control]="filterForm.get('Status')" 
+									[textField]="'name'" [loadOnInit]="true" [placeholder]="'Select Status'">
+								</kt-jx-mat-select>
+							</div>
+						</div>
+						<div class="col-lg-2 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<kt-jx-mat-select [multiple]="true"
+									[label]="'Product'"
+									[url]="'/v1/marketing/enquiry-products'" [valueField]="'id'"
+									[control]="filterForm.get('ProductIds')" 
+									[textField]="'name'" [loadOnInit]="true" [placeholder]="'Select Product'">
+								</kt-jx-mat-select>
+							</div>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-input [label]="'Enquiry#'" [type]="'number'" [placeholder]="'0'" [control]="filterForm.get('EnquiryId')"></jx-mat-input>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-input [label]="'PartyName'" [control]="filterForm.get('PartyName')"></jx-mat-input>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-input [label]="'City'" [control]="filterForm.get('City')"></jx-mat-input>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-input [label]="'Mobile'" [control]="filterForm.get('Mobile')"></jx-mat-input>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-input [label]="'Email'" [control]="filterForm.get('Email')"></jx-mat-input>
+						</div>
+						<div class="col-lg-2 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<kt-jx-mat-select [multiple]="true"
+									[label]="'State'"
+									[url]="'/v1/masters/states'" [valueField]="'id'"
+									[control]="filterForm.get('States')" 
+									[textField]="'name'" [loadOnInit]="true" [placeholder]="'Select State'">
+								</kt-jx-mat-select>
+							</div>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-date-range-picker [label]="'Followup Date Range'" [dateRangeFormGroup]="filterForm.get('FollowupDateRange')"></jx-mat-date-range-picker>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<jx-mat-date-range-picker [label]="'Create Date Range'" [dateRangeFormGroup]="filterForm.get('CreatedDateRange')"></jx-mat-date-range-picker>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<button type="submit" (click)="onFilterSubmit()" class="btn btn-primary btn-elevate kt-login__btn-primary filter-button" [ngClass]="{ 'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': viewLoading }"
+							 mat-raised-button color="primary" matTooltip="Filter">Search</button> &nbsp;
+							<button type="button" (click)="clearFilter()" class="btn btn-danger btn-elevate kt-login__btn-primary filter-button" mat-raised-button color="danger" (click)="clearFilter()" matTooltip="Clear Filter">Clear</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row align-items-center collapse kt-form__group-actions kt-margin-top-20 kt-margin-bottom-20" [ngClass]="{ show: selection.selected.length > 0 }">
+				<div class="col-xl-12">
+					<div class="kt-form__group kt-form__group--inline">
+						<div class="kt-form__label kt-form__label-no-wrap">
+							<label class="kt--font-bold kt-font-danger-"> <span translate="COMMON.SELECTED_RECORDS_COUNT"></span> {{ selection.selected.length }} </label>
+						</div>
+						<div class="kt-form__control kt-form__group--inline">
+							<!-- <button (click)="deleteEnquiries()" mat-raised-button color="accent"
+								matTooltip="Delete selected enquiries" class="mat-button-mt-4">
+								<mat-icon>delete</mat-icon>
+								Delete All
+							</button> -->
+							<!-- <button (click)="updateStatusForEnquiries()" mat-raised-button
+								matTooltip="Update status for selected enquiries" class="mat-button-mt-4">
+								<mat-icon>update</mat-icon>
+								Update status
+							</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div perfectScrollbar [ngStyle]="{ 'max-height': '65vh', position: 'relative' }" class="mat-table__wrapper mat-table__wrapper--dashboard mb-4">
+			<mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource" matSort #sort="matSort" matSortActive="FollowupDate" matSortDirection="asc" matSortDisableClear>
+				<ng-container matColumnDef="select">
+					<mat-header-cell *matHeaderCellDef class="mat-column-checkbox">
+						<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [color]="'primary'"> </mat-checkbox>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row" class="mat-column-checkbox">
+						<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [color]="'primary'"> </mat-checkbox>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="EnquiryId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> Enquiry Id# </mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<a class="kt-link" href="javascript:void(0);" (click)="editFollowup(row)">{{ row.enquiryId }}</a>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="PartyName">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> PartyName </mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<!-- <span [innerHtml]="row.Child"></span> -->
+						<div class="d-flex justify-content-start flex-column">
+							<span href="#" class="text-dark fw-bolder text-hover-primary fs-6 d-flex">
+								<!-- <mat-icon class="text-primary">accessibility</mat-icon> -->
+								{{ row.partyName }}
+							</span>
+							<!-- <span class="text-muted fw-bold text-muted d-block fs-7 d-flex">
+								<mat-icon class="text-danger">perm_identity</mat-icon>{{row.ParentName}}
+							</span> -->
+						</div>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="ProductName">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> Product </mat-header-cell>
+					<mat-cell *matCellDef="let row">{{ row.productName }}</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="Contacts">
+					<mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<!-- <span [innerHtml]="row.Contact"></span> -->
+						<div class="d-flex justify-content-start flex-column">
+							<div class="contacts-wrapper text-muted fw-bold text-muted d-block fs-9 d-flex" mat-icon-button>
+								<div class="contact-item">
+									<a [copy-clipboard]="row.mobile" mat-icon-button target="_blank"> <img src="../../../../../assets/media/icons/whatsapp-15.png" />&nbsp;{{ row.mobile }} </a>
+								</div>
+								<div class="launch-item">
+									<a mat-icon-button target="_blank" href="https://wa.me/{{ row.mobile }}">
+										<mat-icon>launch</mat-icon>
+									</a>
+								</div>
+							</div>
+							<div class="contacts-wrapper text-muted fw-bold text-muted d-block fs-9 d-flex" mat-icon-button>
+								<div class="contact-item">
+									<button mat-icon-button [copy-clipboard]="row.email"><mat-icon>mail</mat-icon>{{ row.email | truncate : 15 }}</button>
+								</div>
+								<div class="launch-item">
+									<a mat-icon-button target="_blank" href="mailto:{{ row.email }}?subject=DRS Internation school&body=Dear {{ row.ParentName }},">
+										<mat-icon>launch</mat-icon>
+									</a>
+								</div>
+							</div>
+						</div>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="City">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+					<mat-cell *matCellDef="let row"> {{ row.city }} | {{ row.stateName }} </mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="CreatedOn">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </mat-header-cell>
+					<mat-cell *matCellDef="let row">{{ row.createdDate | date }}</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="FollowupDate">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>
+						{{ "MODULES.PREADMISSIONS.ENQUIRIES.FORM.FOLLOWUPDATE" | translate }}
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row" [innerHTML]="row.followupDate | date | empty : '-'"> </mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="Status">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>
+						{{ "MODULES.PREADMISSIONS.ENQUIRIES.FORM.STATUS" | translate }}
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row"><span [innerHTML]="row.status | enquiryStatus"></span></mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="actions">
+					<mat-header-cell *matHeaderCellDef>{{ "COMMON.ACTIONS" | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<button mat-icon-button color="primary" matTooltip="{{ 'CRUD.EDIT_ENTITY' | translate : { name: 'Enquiries' } }}" (click)="editEnquiries(row)">
+							<mat-icon>edit</mat-icon>
+						</button>
+						<button mat-icon-button color="primary" matTooltip="{{ 'CRUD.VIEW_ENTITY' | translate : { name: 'Enquiries' } }}" type="button" (click)="viewEnquiries(row)">
+							<mat-icon> visibility </mat-icon>
+						</button>
+					</mat-cell>
+				</ng-container>
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+			</mat-table>
+			<div class="mat-table__message" *ngIf="!dataSource.hasItems">{{ "COMMON.NO_RECORDS_FOUND" | translate }}</div>
+			<div class="mat-table__message" *ngIf="dataSource.loading$ | async">{{ "COMMON.PLEASE_WAIT" | translate }}</div>
+		</div>
+		<div class="mat-table__bottom">
+			<mat-spinner [diameter]="20" *ngIf="dataSource.loading$ | async"></mat-spinner>
+			<mat-paginator [length]="dataSource.paginatorTotal$ | async" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true"></mat-paginator>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

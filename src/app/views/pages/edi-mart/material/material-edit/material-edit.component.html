@@ -1,0 +1,34 @@
+<jx-mat-form [title]="'Add Material'" [showToolBarAddBtn]="false" [showToolBar]="true" [showToolBarBackBtn]="true"
+  [saveDisabled]="formConfig.formGroup.invalid" [saving]="formConfig.saving" [formLoading]="formConfig.formLoading"
+  [isMatDialog]="false" [parentGroup]="formConfig.formGroup" (onSave)="onSubmit(true)" (onCancel)="goBackToList()">
+  <div class="row">
+    <div class="col-lg-6 kt-margin-bottom-20-mobile">
+      <div class="form-group kt-form__group">
+        <jx-mat-input [label]="'Name'" [placeholder]="'Name'"
+          [control]="formConfig.formGroup.get('name')"></jx-mat-input>
+      </div>
+    </div>
+    <div class="col-lg-6 kt-margin-bottom-20-mobile">
+      <div class="form-group kt-form__group">
+        <jx-mat-input [label]="'Subject'" [placeholder]="'Subject'"
+          [control]="formConfig.formGroup.get('subject')"></jx-mat-input>
+      </div>
+    </div>
+    <div class="col-lg-12 kt-margin-bottom-20-mobile">
+      <div class="form-group kt-form__group">
+        <jx-rich-text-editor [control]="formConfig.formGroup.get('body')"></jx-rich-text-editor>
+      </div>
+    </div>
+    <ng-container *ngIf="materialModel && materialModel?.attachments">
+      <div class="col-lg-6 kt-margin-bottom-20-mobile">
+        <kt-jx-file-uploader [showFileList]="true" [fileListConfig]="{
+            displayedColumns: ['name'],
+            downloadUrl:'/v1/marketing/materials/{id}/documents/{id}/download',
+            deleteUrl:'/v1/marketing/materials/{id}/documents/{id}'}" [fileItems]="materialModel?.attachments"
+          [multiple]="true" [maxSize]="1000" [control]="formConfig.formGroup.get('files')"
+          (onFileChange)='fileSelected($event)'></kt-jx-file-uploader>
+      </div>
+    </ng-container>
+
+  </div>
+</jx-mat-form>

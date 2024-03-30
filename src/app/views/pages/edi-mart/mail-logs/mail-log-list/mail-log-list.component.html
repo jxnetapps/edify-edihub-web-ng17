@@ -1,0 +1,58 @@
+<ng-container *ngIf="showCreateSection">
+  <div class="row">
+    <div class="col-md-12">
+      <jx-mat-form [showHeader]="false" [title]="'Share documents'" [saveDisabled]="formConfig.formGroup.invalid"
+        [saving]="formConfig.saving" [formLoading]="formConfig.formLoading" [isMatDialog]="false"
+        [parentGroup]="formConfig.formGroup" (onCancel)="showHideCreate()" (onSave)="onSubmit()">
+        <div class="row">
+          <div class="col-lg-12 kt-margin-bottom-20-mobile">
+            <div class="form-group kt-form__group">
+              <jx-mat-input [label]="'Subject'" [placeholder]="'Enter subject'"
+                [control]="formConfig.formGroup.get('subject')"></jx-mat-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 kt-margin-bottom-20-mobile">
+            <div class="form-group kt-form__group">
+              <jx-mat-input [type]="'email'" [label]="'To'" [placeholder]="'mail@edify.com'"
+                [control]="formConfig.formGroup.get('receiverEmailId')"></jx-mat-input>
+            </div>
+          </div>
+          <div class="col-lg-6 kt-margin-bottom-20-mobile">
+            <div class="form-group kt-form__group">
+              <jx-mat-input [type]="'email'" [label]="'CC'" [placeholder]="'mail@edify.com'"
+                [control]="formConfig.formGroup.get('ccMailId')"></jx-mat-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 kt-margin-bottom-20-mobile">
+            <div class="form-group kt-form__group">
+              <jx-rich-text-editor [control]="formConfig.formGroup.get('message')"></jx-rich-text-editor>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 kt-margin-bottom-20-mobile">
+            <div class="form-group kt-form__group">
+              <kt-jx-mat-select
+                [label]="'Attachments'"
+                [multiple]="true"
+                [url]="'/v1/marketing/materials/lookup'" 
+                [control]="formConfig.formGroup.get('attachments') | formControl"></kt-jx-mat-select>
+            </div>
+          </div>
+        </div>        
+      </jx-mat-form>
+    </div>
+  </div>
+</ng-container>
+<div class="row">
+  <div class="col-md-12">
+    <kt-jx-data-table [config]="config"
+      (onRowLinkClick)="onRowLinkClick($event)"
+      #jxMatTable>
+    </kt-jx-data-table>
+  </div>
+</div>

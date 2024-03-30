@@ -1,0 +1,20 @@
+<form class="kt-form" [formGroup]="filterForm" autocomplete="off">
+    <div class="kt-form__filtration">
+		<div class="row align-items-center">
+			<div class="col-md-3 kt-margin-bottom-10-mobile">
+				<kt-shared-academicyear [parentGroup]="filterForm" [controlName]="'AcademicYearId'" (selectChange)="academicYearSelectChanged($event)"></kt-shared-academicyear>
+			</div>
+			<div class="col-md-3 kt-margin-bottom-10-mobile">
+				<kt-shared-classes [enableAuthorization]="enableAuthorization" [academicYearId]="selectedAcademicYearId" [parentGroup]="filterForm" [controlName]="'ClassId'" (selectChange)="classSelectChanged($event)"></kt-shared-classes>
+			</div>
+			<div class="col-md-3 kt-margin-bottom-10-mobile">
+				<kt-shared-sections [enableAuthorization]="enableAuthorization" [enableAuthorization]="true" [parentGroup]="filterForm" [controlName]="'SectionId'" [classId]="selectedClassId" (selectChange)="sectionSelectChanged($event)"></kt-shared-sections>
+			</div>
+			<div class="col-md-1 text-right kt-margin-bottom-10-mobile">
+				<button type="button" [disabled]="!(selectedSectionId > 0) || viewLoading" class="btn btn-primary btn-elevate kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': viewLoading}" mat-raised-button color="primary" (click)="onSubmit()" matTooltip="Filter">
+					Submit
+				</button>
+			</div>
+		</div>
+    </div>
+</form>

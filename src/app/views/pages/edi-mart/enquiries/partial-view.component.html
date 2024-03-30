@@ -1,0 +1,144 @@
+<div class="row" *ngIf="enquiry">
+	<div class="col-md-12">
+		<div class="kt-widget1">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">{{ "MODULES.PREADMISSIONS.ENQUIRIES.FORM.ENQUIRYID" | translate }}</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.enquiryId }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Party Name</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.partyName }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Product Name</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.productName }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Email</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.email }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Mobile</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.mobile }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Landline No</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.landLineNo }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Area</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.area }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Investment Capacity</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.investmentCapacity }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Source</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.source }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">City</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.city }}, {{ enquiry.stateName }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title"> Address</span></div>
+							<span class="kt-widget1__desc">{{ enquiry.address }}</span>
+						
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title"> Reporting Person</span></div>
+							<span class="kt-widget1__desc">{{ enquiry.reportingPerson }}</span>
+						
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title"> Followup Date</span></div>
+							<span class="kt-widget1__desc">{{ enquiry.followupDate | date }}</span>
+						
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">{{ "MODULES.PREADMISSIONS.ENQUIRIES.FORM.CREATEDON" | translate }}</span>
+						</div>
+						<span class="kt-widget1__desc">{{ enquiry.createdDate | date }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Initial Status</span>
+						</div>
+						<span class="kt-widget1__desc" [innerHTML]="enquiry.initialStatus | enquiryStatus"></span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">Current Status</span>
+						</div>
+						<span class="kt-widget1__desc" [innerHTML]="enquiry.status | enquiryStatus"></span>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="kt-widget1__item">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title"> Remarks</span><br>
+							<span class="kt-widget1__desc">{{ enquiry.remarks }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

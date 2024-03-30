@@ -1,0 +1,20 @@
+<jx-mat-form [title]="'Transform Enquiries'" [saveDisabled]="formConfig.formGroup.invalid" [saving]="formConfig.saving | async"
+	[formLoading]="formConfig.formLoading" [customButtons]="[ {title:'Transform Enq.', color:'primary', action:'transformonly'},
+	{title:'Delete User And Transform', color:'warn', action:'deletenadtransformonly'}]"  [showCancelButton]="false" [parentGroup]="formConfig.formGroup" (onSave)="onSubmit($event)">
+	<div class="row">
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [label]="'Employee'" [valueField]="'EmployeeId'" [loadOnChange]="true" [dataSource]="employeeItems$ | async"
+					[textField]="'EmployeeName'" [placeholder]="'Select Employee'"
+					[control]="formConfig.formGroup.get('fromEmployeeId')"></kt-jx-mat-select>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [label]="'Employee'" [valueField]="'EmployeeId'" [loadOnChange]="true" [dataSource]="employeeItems$ | async"
+					[textField]="'EmployeeName'" [placeholder]="'Select Employee'"
+					[control]="formConfig.formGroup.get('toEmployeeId')"></kt-jx-mat-select>
+			</div>
+		</div>
+	</div>
+</jx-mat-form>

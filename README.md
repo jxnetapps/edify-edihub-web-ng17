@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+#============================
+npm i "file://C:\Dev\Projects\jx-ng-extensions\dist\jx-ng-core\jx-ng-core-0.0.1.tgz"
+npm i "file://C:\Dev\Projects\jx-ng-extensions\dist\jx-perfect-scrollbar\jx-perfect-scrollbar-0.0.1.tgz"

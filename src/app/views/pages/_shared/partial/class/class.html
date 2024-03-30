@@ -1,0 +1,7 @@
+<kt-jx-mat-select 
+ [enableOptGroup]="true" 
+[groupBy]="'AcademicGroupName'"
+[loadOnChange]="loadOnChange" [label]="'Class'"
+   (selectChange)="selectChanged($event)" (onLoaded)="onLoaded.emit()" [url]="url" [valueField]="'ClassId'" [textField]="'ClassName'"
+   [loadOnInit]="loadOnInit" [multiple]="multiple" [placeholder]="'Select Class'" [control]="control">
+</kt-jx-mat-select>

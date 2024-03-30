@@ -1,0 +1,16 @@
+<div *ngIf="type === 1" class="alert alert-light alert-elevate" [ngClass]="classes" role="alert">
+	<div *ngIf="icon" class="alert-icon alert-icon-top">
+		<i [ngClass]="icon"></i>
+	</div>
+	<div class="alert-text">
+		<ng-content></ng-content>
+	</div>
+</div>
+<div  *ngIf="type === 2" class="notice d-flex bg-light-{{color}} rounded border-{{color}} border border-dashed p-6">
+	<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+		<div class="mb-3 mb-md-0 fw-bold">
+			<h4 *ngIf="title" class="text-gray-800 fw-bolder">{{title}}</h4>
+			<div class="fs-6 text-gray-600 pe-7"><ng-content></ng-content></div>
+		</div>
+	</div>
+</div>

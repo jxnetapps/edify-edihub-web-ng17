@@ -1,0 +1,18 @@
+<jx-mat-form [title]="'Add User'" [saveDisabled]="formConfig.formGroup.invalid" [saving]="formConfig.saving"
+	[formLoading]="formConfig.formLoading" [showCancelButton]="false" [parentGroup]="formConfig.formGroup" (onSave)="onSubmit(true)">
+	<div class="row">
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-shared-employees [control]="formConfig.formGroup.get('EmployeeId')"></kt-jx-shared-employees>
+			</div>
+		</div>
+		<div class="col-lg-6 kt-margin-bottom-20-mobile">
+			<div class="form-group kt-form__group">
+				<kt-jx-mat-select [loadOnInit]="true" [label]="'Employee'" [enableOptGroup]="true"
+					[groupBy]="'AcademicGroupName'" [url]="'api/academics/classes/lookup'" [valueField]="'ClassId'"
+					[textField]="'ClassName'" [multiple]="true" [placeholder]="'Select Grade'"
+					[control]="formConfig.formGroup.get('GradeIds')"></kt-jx-mat-select>
+			</div>
+		</div>
+	</div>
+</jx-mat-form>

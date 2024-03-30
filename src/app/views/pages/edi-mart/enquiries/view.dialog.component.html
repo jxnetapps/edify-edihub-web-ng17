@@ -1,0 +1,30 @@
+<div class="kt-portlet">
+	<div class="kt-portlet__head kt-portlet__head__custom">
+		<div class="kt-portlet__head-label">
+			<h3 class="kt-portlet__head-title">Enquiry Details</h3>
+		</div>
+	</div>
+	<form class="kt-form">
+		<div class="kt-portlet__body">
+			<mat-tab-group (selectedTabChange)="tabChanged($event)">
+				<mat-tab label="Followup List">
+					<kt-enquiryfollowups-list #enquiryFollowupsList></kt-enquiryfollowups-list>
+				</mat-tab>
+				<mat-tab label="Enquiry Details">
+					<kt-enquiries-partial-view #enquiriesViewComponent></kt-enquiries-partial-view>
+				</mat-tab>
+			</mat-tab-group>
+		</div>
+		<div class="kt-portlet__foot kt-portlet__foot--fit kt-portlet__no-border">
+			<div class="kt-form__actions kt-form__actions--solid">
+				<div class="row text-right">
+					<div class="col-lg-12">
+						<button type="button" mat-raised-button [mat-dialog-close]="data.animal" cdkFocusInitial matTooltip="{{'COMMANDS.CANCEL_CHANGES'| translate}}">
+							<span translate="COMMANDS.CANCEL"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

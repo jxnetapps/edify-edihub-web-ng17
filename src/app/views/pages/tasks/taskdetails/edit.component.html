@@ -1,0 +1,157 @@
+<kt-portlet>
+	<kt-portlet-header [title]="getComponentTitle()" [class]="'kt-portlet__head--lg'">
+		<ng-container ktPortletTools>
+			<a (click)="goBackWithId()" class="btn btn-secondary kt-margin-r-10" mat-raised-button
+				matTooltip="{{'COMMANDS.BACKTOOLTIP'| translate : { name: 'permission' } }}">
+				<i class="la la-arrow-left"></i>
+				<span class="kt-hidden-mobile">
+					<span translate="COMMANDS.BACK"></span>
+				</span>
+			</a>
+		</ng-container>
+	</kt-portlet-header>
+
+	<kt-portlet-body>
+		<!--begin::Form-->
+		<div *ngIf="taskdetails">
+			<form [formGroup]="taskdetailsForm" (ngSubmit)="onSubmit(true)" autocomplete="off" class="kt-form">
+				<kt-alert *ngIf="hasFormErrors" type="warn" [showCloseButton]="true" [duration]="10000"
+					(close)="onAlertClose($event)">
+					<span translate="ERRORMESSAGE"></span>
+				</kt-alert>
+				<div class="kt-form__section kt-form__section--first">
+					<div class="row">
+						<div class="col-lg-12 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<mat-form-field appearance="outline" class="mat-form-field-fluid">
+									<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.SUBJECT' | translate }}</mat-label>
+									<input matInput
+										placeholder="{{'MODULES.TASKS.TASKDETAILS.FORM.SUBJECT'| translate }}"
+										formControlName="Subject" />
+									<mat-error>
+										{{ 'MODULES.TASKS.TASKDETAILS.FORM.SUBJECT' | translate }} {{ 'COMMON.IS' |
+										translate }}
+										<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<!-- <mat-form-field appearance="outline" class="mat-form-field-fluid">
+									<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDTO' | translate }}</mat-label>
+									<input matInput placeholder="{{'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDTO'| translate }}" formControlName="AssignedTo" />
+									<mat-error>
+										{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDTO' | translate }} {{ 'COMMON.IS' | translate }}
+										<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+									</mat-error>
+								</mat-form-field> -->
+								<!-- <kt-shared-activeteachers [parentGroup]="taskdetailsForm"
+									(selectChange)="onEmployeeSelected($event)" [(selectedValue)]="selectedEmployeeId"
+									[controlName]="'AssignedTo'"></kt-shared-activeteachers> -->
+									<kt-jx-shared-employees (selectChange)="employeeChanged($event)" [control]="taskdetailsForm.get('AssignedToId')"></kt-jx-shared-employees>
+							</div>
+						</div>
+						<div class="col-lg-4 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<mat-form-field appearance="outline" class="mat-form-field-fluid">
+									<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.PRIORITY' | translate }}</mat-label>
+									<mat-select
+										placeholder="{{'COMMON.SELECT_NAME'| translate : { name: 'priority' } }}"
+										formControlName="Priority">
+										<mat-option *ngFor="let row of priority" [value]="row.id">
+											{{row.text}}
+										</mat-option>
+									</mat-select>
+									<mat-error>
+										{{ 'MODULES.TASKS.TASKDETAILS.FORM.PRIORITY' | translate }} {{ 'COMMON.IS' |
+										translate }}
+										<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="col-lg-4 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<mat-form-field appearance="outline" class="mat-form-field-fluid">
+									<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.DUEDATE' | translate }}</mat-label>
+									<input matInput formControlName="DueDate" [matDatepicker]="DUEDATE" readonly
+										placeholder="{{'COMMON.ENTER'| translate }} {{ 'MODULES.TASKS.TASKDETAILS.FORM.DUEDATE' | translate  }}">
+									<mat-datepicker-toggle matSuffix [for]="DUEDATE"></mat-datepicker-toggle>
+									<mat-datepicker #DUEDATE></mat-datepicker>
+									<mat-error>
+										{{ 'MODULES.TASKS.TASKDETAILS.FORM.DUEDATE' | translate }} {{ 'COMMON.IS' |
+										translate }}
+										<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 kt-margin-bottom-20-mobile">
+							<div class="form-group kt-form__group">
+								<mat-form-field appearance="outline" class="mat-form-field-fluid">
+									<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.DESCRIPTION' | translate }}
+									</mat-label>
+									<textarea matInput
+										placeholder="{{'MODULES.TASKS.TASKDETAILS.FORM.DESCRIPTION'| translate }}"
+										formControlName="Description"></textarea>
+									<mat-error>
+										{{ 'MODULES.TASKS.TASKDETAILS.FORM.DESCRIPTION' | translate }} {{ 'COMMON.IS' |
+										translate }}
+										<strong>{{'COMMON.REQUIRED' | translate}}</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+					<div class="row  table-view"
+						*ngIf="taskdetails && taskdetails.Attachments && taskdetails.Attachments.length > 0">
+						<div class="col-lg-12">
+							<table class="table jx-table">
+								<tbody>
+									<tr><th>Attachments:</th></tr>
+									<tr *ngFor="let file of taskdetails.Attachments">
+										<td>
+											<kt-jx-download
+												[filePath]="file.SavedPath" [fileName]="file.DisplayName"
+												(downloadStatus)="downloadStatus($event)"></kt-jx-download> &nbsp;&nbsp;
+											<button mat-icon-button color="warn"
+											matTooltip="{{'CRUD.DELETE_ENTITY' | translate : { name: 'Attachment'} }}" type="button"
+											(click)="deleteTaskAttachment(file.Id)">
+										<mat-icon>delete</mat-icon>
+									</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<kt-jx-file (fileChange)='fileChanged($event)'></kt-jx-file>
+						</div>
+					</div>
+				</div>
+				<div class="kt-portlet__foot kt-portlet__foot--fit kt-portlet__no-border">
+					<div class="kt-form__actions kt-form__actions--solid">
+						<div class="row text-right">
+							<div class="col-lg-12">
+								<button type="button" [disabled]="taskdetailsForm.invalid || viewLoading"
+									class="btn btn-primary kt-margin-r-10"
+									[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': viewLoading}"
+									mat-raised-button color="primary" (click)="onSubmit(true)"
+									matTooltip="{{'COMMANDS.SAVETOOLTIP'| translate}}">
+									<span translate="COMMANDS.SAVE"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--end::Form-->
+	</kt-portlet-body>
+</kt-portlet>

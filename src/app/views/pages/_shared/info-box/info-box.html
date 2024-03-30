@@ -1,0 +1,55 @@
+<ng-template [ngIf]="look === 'box'">
+    <div class="info-box" [ngClass]="type">
+        <span class="info-box-icon">
+            <i class="fa {{icon}}"></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-number">
+                {{header}}
+            </span>
+            <span class="info-box-text">{{subheader}}</span>
+        </div>
+    </div>
+</ng-template>
+<ng-template [ngIf]="look === 'card'">
+    <div class="card" [ngClass]="type">
+        <div class="card-block">
+            <h4 class="card-title text-white">{{header}}</h4>
+            <div class="text-right">
+                <h2 class="font-light m-b-0 text-white"><i class="icon-2x fa {{icon}}"></i>  {{subheader}}</h2>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template [ngIf]="look === 'widget'">
+    <div class="widget-box" [ngClass]="type">
+        <span class="widget-box__desc text-uppercase">{{header}}</span>
+        <span class="widget-box__value">{{subheader}}</span>
+    </div>
+</ng-template>
+<!-- <ng-container *ngIf="look === 'box';  then box; else card">
+</ng-container>
+<ng-template #box>
+    <div class="info-box" [ngClass]="type">
+        <span class="info-box-icon">
+            <i class="fa {{icon}}"></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-number">
+                {{header}}
+            </span>
+            <span class="info-box-text">{{subheader}}</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #card>
+    <div class="card" [ngClass]="type">
+        <div class="card-block">
+            <h4 class="card-title text-white">{{header}}</h4>
+            <div class="text-right">
+                <h2 class="font-light m-b-0 text-white"><i class="icon-2x fa {{icon}}"></i>  {{subheader}}</h2>
+            </div>
+        </div>
+    </div>
+</ng-template> -->

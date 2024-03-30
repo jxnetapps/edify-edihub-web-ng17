@@ -1,0 +1,102 @@
+<div class="row">
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Today MIS'"></kt-portlet-header>
+			<kt-portlet-body>
+				<ng-container *ngIf="isAdmin; else elseBlock">
+					<kt-jx-dynamic-table [data]="misResult | async"></kt-jx-dynamic-table>
+				</ng-container>				
+				<ng-template #elseBlock>
+					<kt-jx-view-entity [server]="false" [formatDisplay]="false"
+					[data]="(misResult | async)[0]"></kt-jx-view-entity>
+				  </ng-template>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Last 7 days enquiry Status'"></kt-portlet-header>
+			<kt-portlet-body>
+				<div class="kt-widget1">
+					<div class="kt-widget1__item" *ngFor="let row of weeklyResult | async">
+						<div class="kt-widget1__info">
+							<span class="kt-widget1__title">{{row.Day}}</span>
+						</div>
+						<span class="kt-widget1__desc">{{row.Total}}</span>
+					</div>
+				</div>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Status Summary'"></kt-portlet-header>
+			<kt-portlet-body>
+				<ng-container *ngIf="isAdminUser; else elseBlock">
+					<kt-jx-dynamic-table [data]="statusResult$ | async"></kt-jx-dynamic-table>
+				</ng-container>				
+				<ng-template #elseBlock>
+					<kt-jx-view-entity [server]="false" [formatDisplay]="false"
+					[data]="(statusResult$ | async)[0]"></kt-jx-view-entity>
+				  </ng-template>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-xl-6">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Channel wise summary'"></kt-portlet-header>
+			<kt-portlet-body>
+				<ng-container *ngIf="isAdmin; else elseBlock">
+					<kt-jx-dynamic-table [data]="channelResult$ | async"></kt-jx-dynamic-table>
+				</ng-container>				
+				<ng-template #elseBlock>
+					<kt-jx-view-entity [server]="false" [formatDisplay]="false"
+					[data]="(channelResult$ | async)[0]"></kt-jx-view-entity>
+				  </ng-template>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xl-12">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Status Conversion Report'"></kt-portlet-header>
+			<kt-portlet-body>				
+					<!-- <kt-jx-dynamic-table [columns]="['Status','Visit','AdmissionForm','SkillTest','Admissions','Warm','NextYear','Dead']" 
+					[data]="statusConversionResult | async"></kt-jx-dynamic-table> -->
+					<table class="jx-table no-margin">
+						<thead class="table-background-1">
+							<tr>
+								<th>#</th>
+								<th>Status</th>
+								<th>Visit</th>
+								<th>AdmissionForm</th>
+								<th>SkillTest</th>
+								<th>Admissions</th>
+								<th>Warm</th>
+								<th>NextYear</th>
+								<th>Dead</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let row of statusConversionResult | async; let i = index">
+								<td>{{i+1}}</td>
+								<td>{{row.Status}}</td>
+								<td>{{row.Visit}}</td>
+								<td>{{row.AdmissionForm}}</td>
+								<td>{{row.SkillTest}}</td>
+								<td>{{row.Admissions}}</td>
+								<td>{{row.Warm}}</td>
+								<td>{{row.NextYear}}</td>
+								<td>{{row.Dead}}</td>
+							</tr>
+							<tr *ngIf="(statusConversionResult | async).length === 0 "><td colspan="9">No data available</td></tr>
+						</tbody>
+					</table>				
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div>

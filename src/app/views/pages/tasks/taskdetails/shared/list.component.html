@@ -1,0 +1,152 @@
+<div class="kt-form">
+	<div class="kt-form__filtration">
+		<div class="row align-items-center">
+			<div class="col-md-12 kt-margin-bottom-10-mobile">
+				<form [formGroup]="taskFilterForm" (ngSubmit)="onFilterSubmit()" autocomplete="off" class="kt-form">
+					<div class="row align-items-center">
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<mat-form-field appearance="outline" class="mat-form-field-fluid">
+								<mat-label>Task ID</mat-label>
+								<input type="number" matInput formControlName="TaskId" placeholder="Enter Task#">
+							</mat-form-field>
+						</div>
+						<div class="col-md-3 kt-margin-bottom-10-mobile">
+							<mat-form-field appearance="outline" class="mat-form-field-fluid">
+								<mat-label>Subject</mat-label>
+								<input matInput formControlName="Subject"
+									placeholder="Enter Subject">
+							</mat-form-field>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<mat-form-field appearance="outline" class="mat-form-field-fluid">
+								<mat-label>{{ 'MODULES.TASKS.TASKDETAILS.FORM.PRIORITY' | translate }}</mat-label>
+								<mat-select placeholder="{{'COMMON.SELECT_NAME'| translate : { name: 'Status' } }}"
+									formControlName="Priority">
+									<mat-option value="0">-ALL-</mat-option>
+									<mat-option *ngFor="let row of taskPriority" [value]="row.Id">
+										{{row.Name}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="col-md-2 kt-margin-bottom-10-mobile">
+							<mat-form-field appearance="outline" class="mat-form-field-fluid">
+								<mat-label>Status</mat-label>
+								<mat-select placeholder="{{'COMMON.SELECT_NAME'| translate : { name: 'priority' } }}"
+									formControlName="Status">
+									<mat-option value="0">-ALL-</mat-option>
+									<mat-option *ngFor="let row of taskStatus" [value]="row.Id">
+										{{row.Name}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="col-md-3 kt-margin-bottom-10-mobile">
+							<button type="button" class="btn btn-primary btn-elevate kt-login__btn-primary filter-button"
+								[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loadingIndicator}"
+								mat-raised-button color="primary" (click)="onFilterSubmit()" matTooltip="Filter">
+								Search
+							</button>&nbsp;
+							<button type="button" class="btn btn-primary btn-elevate kt-login__btn-primary filter-button"
+								mat-raised-button color="warn" (click)="onFilterClear()" matTooltip="Filter">
+								Clear
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="m-15rem kt-separator kt-separator--space-lg kt-separator--border-dashed"></div>
+<div class="mat-table__wrapper">
+	<mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource" matSort #sort="matSort"
+		matSortActive="CreatedOn" matSortDirection="asc" matSortDisableClear>
+		<ng-container matColumnDef="TaskId">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.TASKID' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">{{row.TaskId}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="Subject">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.SUBJECT' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<span matTooltip="{{row.Subject}}" [innerHTML]="row.Subject | truncate : 20"></span>
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="AssignedTo">
+			<mat-header-cell *matHeaderCellDef>{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDTO' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				{{row.AssignedTo}}
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="AssignedBy">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.ASSIGNEDBY' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">{{row.AssignedBy}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="Priority">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.PRIORITY' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<span class="kt-widget1__desc" [innerHTML]="row.Priority | taskPriority"></span>
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="DueDate">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.DUEDATE' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">{{row.DueDate}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="CreatedOn">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.CREATEDON' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">{{row.CreatedOn}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="Status">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>
+				{{ 'MODULES.TASKS.TASKDETAILS.FORM.STATUS' | translate }}
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<span class="kt-widget1__desc" [innerHTML]="row.Status | taskStatus"></span>
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="actions">
+			<mat-header-cell *matHeaderCellDef>{{ 'COMMON.ACTIONS' | translate }}</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<button mat-icon-button color="warn" matTooltip="Update task" (click)="updateStatus(row)">
+					<mat-icon>visibility</mat-icon>
+				</button>
+				<button *ngIf="tasktype === 'assigned'" mat-icon-button color="primary"
+					matTooltip="{{'CRUD.EDIT_ENTITY' | translate : { name: 'Tickets'} }}" (click)="editTask(row)">
+					<mat-icon>edit</mat-icon>
+				</button>&nbsp;
+				<button *ngIf="tasktype === 'assigned'" mat-icon-button color="warn"
+					matTooltip="{{'CRUD.DELETE_ENTITY' | translate : { name: 'Tickets'} }}" type="button"
+					(click)="deleteTask(row)">
+					<mat-icon>delete</mat-icon>
+				</button>&nbsp;
+			</mat-cell>
+		</ng-container>
+		<mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: getDisplayedColumns();"></mat-row>
+	</mat-table>
+	<div class="mat-table__message" *ngIf="!dataSource.data.length && !loadingIndicator">
+		{{
+		'COMMON.NO_RECORDS_FOUND' |
+		translate
+		}}
+	</div>
+	<div class="mat-table__message" *ngIf="loadingIndicator">{{ 'COMMON.PLEASE_WAIT' | translate }}</div>
+</div>
+<div class="mat-table__bottom">
+	<mat-spinner [diameter]="20" *ngIf="loadingIndicator"></mat-spinner>
+	<mat-paginator [length]="paginatorTotal$" [pageSize]="10" [pageSizeOptions]="[10,20,50]"
+		[showFirstLastButtons]="true"></mat-paginator>
+</div>
