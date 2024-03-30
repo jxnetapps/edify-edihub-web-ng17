@@ -29,3 +29,18 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #============================
 npm i "file://C:\Dev\Projects\jx-ng-extensions\dist\jx-ng-core\jx-ng-core-0.0.1.tgz"
 npm i "file://C:\Dev\Projects\jx-ng-extensions\dist\jx-perfect-scrollbar\jx-perfect-scrollbar-0.0.1.tgz"
+
+## DISABLE PRE-FLIGHT REQUEST=======
+```
+if (req.http.host == "CUSTOM_URL" ) {
+set resp.http.Access-Control-Allow-Origin = "*";
+if (req.method == "OPTIONS") {
+   set resp.http.Access-Control-Max-Age = "1728000";
+   set resp.http.Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS";
+   set resp.http.Access-Control-Allow-Headers = "Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since";
+   set resp.http.Content-Length = "0";
+   set resp.http.Content-Type = "text/plain charset=UTF-8";
+   set resp.status = 204;
+}
+
+```
